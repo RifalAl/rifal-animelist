@@ -10,7 +10,7 @@ const PopulerList = async () => {
     <Container className="pt-32 md:pt-24">
       <SectionList
         data={popularAnime.data}
-        title={"Anime Populer"}
+        title={"Anime Populerx"}
         url={"/populer"}
       />
     </Container>
