@@ -8,6 +8,7 @@ import VideoPlayer from "../UI/VideoPlayer";
 import { Button } from "@material-tailwind/react";
 import { Play } from "@phosphor-icons/react";
 import CollectionButton from "../UI/CollectionButton";
+import CommentInput from "./CommentInput";
 
 const Anime = ({ data, user, isCollection }) => {
   const [isOpen, setIsopen] = useState(false);
@@ -17,7 +18,7 @@ const Anime = ({ data, user, isCollection }) => {
   };
 
   return (
-    <Container className="pt-32 md:pt-24 relative">
+    <Container className="pt-32 md:pt-24 relative mb-20 md:mb-10">
       <HeaderList title={`${data.title} - ${data.year || ""}`} />
       <div className="flex flex-col md:flex-row gap-5 mt-4 items-center">
         <div className="w-full md:w-3/12">
@@ -55,7 +56,6 @@ const Anime = ({ data, user, isCollection }) => {
             />
           )}
         </div>
-
         <div className="w-full md:w-9/12">
           <div className="hidden md:block">
             <AnimeScore
@@ -105,6 +105,14 @@ const Anime = ({ data, user, isCollection }) => {
           youtubeId={data.trailer.youtube_id}
           isOpen={isOpen}
           onToogle={toogleCloseHandler}
+        />
+      </div>
+      <div className="mt-10">
+        <CommentInput
+          user_email={user.email}
+          mal_id={data.mal_id}
+          user_name={user?.name}
+          anime_title={data.title}
         />
       </div>
     </Container>

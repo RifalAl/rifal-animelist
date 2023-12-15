@@ -1,5 +1,4 @@
 import prisma from "@/service/prisma";
-import { useParams } from "next/navigation";
 
 export async function POST(request) {
   const { mal_id, user_email, image, title } = await request.json();
