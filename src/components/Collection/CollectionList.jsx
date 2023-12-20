@@ -1,7 +1,14 @@
-import React from "react";
-import CollectionItem from "./CollectionItem";
+"use client";
 
-const CollectionList = async ({collections}) => {
+import React, { useEffect } from "react";
+import CollectionItem from "./CollectionItem";
+import { useRouter } from "next/navigation";
+
+const CollectionList = async ({ collections }) => {
+  const router = useRouter();
+  useEffect(() => {
+    router.refresh();
+  }, []);
   return (
     <>
       {collections.length === 0 && (
@@ -9,9 +16,9 @@ const CollectionList = async ({collections}) => {
           <p className="text-center w-full mt-20">No collections</p>
         </div>
       )}
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 pt-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 pt-5">
         {collections &&
-          collections.map((item, index) => {
+          collections.toReversed().map((item, index) => {
             return (
               <div key={index}>
                 <CollectionItem

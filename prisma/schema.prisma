@@ -28,5 +28,6 @@ model Comment {
   comment         String?
   user_name       String?
   anime_title     String?
+  anime_rating    Int?
 
 }

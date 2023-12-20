@@ -1,19 +1,27 @@
-import React from "react";
-import getAnimeResponse from "@/service/api-service";
+import getAnimeResponse, {
+  getCommentsResponse,
+  getIsCollection,
+} from "@/service/api-service";
+
 import Anime from "@/components/Anime/Anime";
+import React from "react";
 import { getUser } from "@/service/auth-service";
 
 const page = async ({ params }) => {
   const idAnime = params.id_anime;
   const anime = await getAnimeResponse(`anime/${idAnime}/full`);
   const data = anime?.data;
+  const comment = await getCommentsResponse(data.mal_id);
+  const isCollection = getIsCollection(idAnime);
   const user = await getUser();
-  const collection = await prisma.collection.findFirst({
-    where: {user_email: user?.email, mal_id: parseInt(idAnime)}
-  })
-  const isCollection = !!collection;
+
   return (
-    <Anime data={data} user={user} isCollection={isCollection}/>
+    <Anime
+      data={data}
+      user={user}
+      isCollection={isCollection}
+      comments={comment}
+    />
   );
 };
 

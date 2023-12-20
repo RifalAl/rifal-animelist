@@ -1,18 +1,18 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-
-import { UserCircle } from "@phosphor-icons/react";
 import {
-  Tooltip,
-  IconButton,
   Avatar,
+  IconButton,
   Menu,
   MenuHandler,
-  MenuList,
   MenuItem,
+  MenuList,
+  Tooltip,
 } from "@material-tailwind/react";
+
+import Link from "next/link";
+import React from "react";
+import { UserCircle } from "@phosphor-icons/react";
 
 const SignInButton = ({ user }) => {
   let content;
@@ -29,9 +29,9 @@ const SignInButton = ({ user }) => {
           />
         </MenuHandler>
         <MenuList className="font-medium text-md">
-          <MenuItem>
-            <Link href={`/users/dashboard`}>Dashboard</Link>
-          </MenuItem>
+          <Link href={`/users/dashboard`}>
+            <MenuItem>Dashboard</MenuItem>
+          </Link>
           <MenuItem>
             <Link href={`/api/auth/signout`}>Sign Out</Link>
           </MenuItem>

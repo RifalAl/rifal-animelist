@@ -1,16 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import Container from "@/components/UI/Container";
-import HeaderList from "@/components/SectionList/HeaderList";
+
 import AnimeScore from "./AnimeScore";
-import VideoPlayer from "../UI/VideoPlayer";
 import { Button } from "@material-tailwind/react";
-import { Play } from "@phosphor-icons/react";
 import CollectionButton from "../UI/CollectionButton";
 import CommentInput from "./CommentInput";
+import CommentList from "./CommentList";
+import Container from "@/components/UI/Container";
+import HeaderList from "@/components/SectionList/HeaderList";
+import { Play } from "@phosphor-icons/react";
+import VideoPlayer from "../UI/VideoPlayer";
 
-const Anime = ({ data, user, isCollection }) => {
+const Anime = ({ data, user, isCollection, comments }) => {
   const [isOpen, setIsopen] = useState(false);
 
   const toogleCloseHandler = () => {
@@ -107,13 +109,25 @@ const Anime = ({ data, user, isCollection }) => {
           onToogle={toogleCloseHandler}
         />
       </div>
-      <div className="mt-10">
-        <CommentInput
-          user_email={user.email}
-          mal_id={data.mal_id}
-          user_name={user?.name}
-          anime_title={data.title}
-        />
+      <div className="mt-20">
+        <div className="mb-5">
+          <HeaderList title="Komentar Penonton" />
+        </div>
+        {user && (
+          <CommentInput
+            user_email={user.email}
+            mal_id={data.mal_id}
+            user_name={user?.name}
+            anime_title={data.title}
+          />
+        )}
+        <div className={`${user && "mt-10"}`}>
+          {comments.length === 0 ? (
+            <p className="text-center">No comment</p>
+          ) : (
+            <CommentList comments={comments} />
+          )}
+        </div>
       </div>
     </Container>
   );
