@@ -14,6 +14,7 @@ const CommentInput = ({ user_email, mal_id, user_name, anime_title }) => {
   const [isValid, setIsValid] = useState(false);
   const [anime_rating, setAnime_rating] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [rating, setRating] = useState(null);
 
   const [openDialog, setOpenDialog] = useState(false);
   const toogleDialogHandler = () => setOpenDialog((prevItem) => !prevItem);
@@ -25,10 +26,6 @@ const CommentInput = ({ user_email, mal_id, user_name, anime_title }) => {
     } else {
       setIsValid(false);
     }
-  };
-
-  const ratingInputChangeHandler = (value) => {
-    setAnime_rating(value);
   };
 
   const postingHandler = async (e) => {
@@ -53,6 +50,7 @@ const CommentInput = ({ user_email, mal_id, user_name, anime_title }) => {
         setInputComment("");
         setIsValid(false);
         setAnime_rating(0);
+        setRating(null);
         setIsSuccess(true);
         toogleDialogHandler();
       } catch (e) {
@@ -80,18 +78,21 @@ const CommentInput = ({ user_email, mal_id, user_name, anime_title }) => {
         placeholder="masukkan komentar..."
         value={inputComment}
       ></textarea>
-
-      <p className="text-sm mt-1 float-left">*minimal 3 karakter</p>
-      <div className="flex items-end mt-5 mb-5 flex-col">
-        <AnimeRating value={anime_rating} onChange={ratingInputChangeHandler} />
-        <div className="mt-4">
+      <p className="text-sm mt-1">*minimal 3 karakter</p>
+      <div className="flex items-start lg:items-end mt-5 mb-5 flex-col">
+        <AnimeRating
+          setAnime_rating={setAnime_rating}
+          setRating={setRating}
+          rating={rating}
+        />
+        <div className="mt-4 w-full lg:w-auto">
           <Button
             onClick={postingHandler}
-            className="flex gap-2 items-center md:w-auto justify-center w-full"
+            className="flex gap-2 items-center md:w-auto justify-center w-full lg:w-auto"
             color="red"
             disabled={!isValid}
           >
-            <ChatDots size={24} /> Posting Komentar
+            <ChatDots size={20} /> Posting Komentar
           </Button>
         </div>
       </div>
@@ -99,7 +100,6 @@ const CommentInput = ({ user_email, mal_id, user_name, anime_title }) => {
       {isSuccess && (
         <DialogAlert
           openDialog={openDialog}
-          toogleDialogHandler={toogleDialogHandler}
           confirmSubmitHandler={confirmSubmitHandler}
           title="Sukses Posting Komentar"
           body="Komentar berhasil diposting!"
@@ -110,7 +110,6 @@ const CommentInput = ({ user_email, mal_id, user_name, anime_title }) => {
       {!isSuccess && (
         <DialogAlert
           openDialog={openDialog}
-          toogleDialogHandler={toogleDialogHandler}
           confirmSubmitHandler={confirmSubmitHandler}
           title="Gagal Posting Komentar"
           body="Komentar gagal diposting, coba lagi!"

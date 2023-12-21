@@ -17,15 +17,13 @@ const CommentItem = ({ comment }) => {
             >
               <MonitorPlay size={24} /> {comment.anime_title}
             </Typography>
-            <Typography>
-              <Rating
-                value={comment.anime_rating}
-                readonly
-                className="cursor-none"
-                unratedColor="red"
-                ratedColor="red"
-              />
-            </Typography>
+            <Rating
+              value={comment.anime_rating}
+              readonly
+              className="cursor-none"
+              unratedColor="red"
+              ratedColor="red"
+            />
             <Typography className="font-medium mt-2">
               {comment.comment}
             </Typography>

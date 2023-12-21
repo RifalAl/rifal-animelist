@@ -13,7 +13,6 @@ import React from "react";
 
 const DialogAlert = ({
   openDialog,
-  toogleDialogHandler,
   confirmSubmitHandler,
   title,
   body,
@@ -23,7 +22,7 @@ const DialogAlert = ({
     <>
       <Dialog
         open={openDialog}
-        handler={toogleDialogHandler}
+        handler={confirmSubmitHandler}
         className="text-center"
         size="xs"
       >
